@@ -12,10 +12,22 @@ void buffer_append_float16(uint8_t* buffer, float number, float scale, int32_t *
     buffer_append_int16(buffer, (int16_t)(number * scale), index);
 }
 
-// Flushes the CAN read buffer since we don't need it.
-void can_flush_read() {
-  CanFrame rxFrame;
-  ESP32Can.readFrame(rxFrame);
+// Handles incoming CAN messages
+void can_loop() {
+    CanFrame rxFrame;
+
+    // read a frame
+    // if no frame, we don't need to check it
+    if (!ESP32Can.readFrame(rxFrame)) return;
+
+    // is it an OTA AP enable/disable?
+    if (rxFrame.identifier == 0x2A685A) {
+        if (rxFrame.data[0]) {
+            // enable AP
+        } else {
+            // disable AP
+        }
+    }
 }
 
 // Function to send the cell voltage over CAN

@@ -25,5 +25,6 @@ void setup() {
 
 
 void loop() {
-    can_flush_read();
+    read_can();
+    bms_loop();
 }

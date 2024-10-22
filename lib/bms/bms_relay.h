@@ -51,7 +51,6 @@ class BmsRelay {
  private:
   void processNextByte();
   void purgeUnknownData();
-  void maybeReplayPackets();
   void ingestPacket(Packet& p);
 
   std::vector<PacketCallback> receivedPacketCallbacks_;

@@ -17,3 +17,7 @@ void bms_setup(HardwareSerial* serial) {
         }
     });
 }
+
+void bms_loop() {
+    relay->loop();
+}

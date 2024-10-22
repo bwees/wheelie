@@ -31,10 +31,7 @@ void BmsRelay::loop() {
   while (true) {
     int byte = source_();
     now_millis_ = millis_provider_();
-    if (byte < 0) {
-      maybeReplayPackets();
-      return;
-    }
+
     sourceBuffer_.push_back(byte);
     processNextByte();
   }
