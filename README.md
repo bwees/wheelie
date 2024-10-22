@@ -1,4 +1,4 @@
-# FMBMS
+# Wheelie
 
 A simple modchip to convert proprietary Future Motion BMS packets (RS485) to VESC BMS packets (CAN). 
 
