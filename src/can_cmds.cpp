@@ -3,6 +3,7 @@
 #include "can_cmds.h"
 #include "config.h"
 #include "packet_parsers.h"
+#include "ota.h"
 
 void buffer_append_int16(uint8_t* buffer, int16_t number, int32_t *index) {
     buffer[(*index)++] = number >> 8;
@@ -22,11 +23,7 @@ void can_loop() {
 
     // is it an OTA AP enable/disable?
     if (rxFrame.identifier == 0x2A685A) {
-        if (rxFrame.data[0]) {
-            // enable AP
-        } else {
-            // disable AP
-        }
+        ota_control(rxFrame.data[0]);
     }
 }
 

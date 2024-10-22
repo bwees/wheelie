@@ -23,4 +23,4 @@ typedef enum {
 
 void can_send_cell_voltage(Packet *packet);
 void transmit_can(uint32_t id, uint8_t* buffer, int length);
-void read_can();
+void can_loop();

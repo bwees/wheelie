@@ -4,6 +4,7 @@
 
 #include "config.h"
 #include "bms.h"
+#include "ota.h"
 #include "can_cmds.h"
 
 HardwareSerial BMSSerial(0);
@@ -21,10 +22,14 @@ void setup() {
     BMSSerial.begin(115200, SERIAL_8N1, BMS_RX, -1);
 
     bms_setup(&BMSSerial);
+    ota_setup();
 }
 
 
 void loop() {
-    read_can();
     bms_loop();
+    can_loop();
+    ota_loop();
+
+    delay(10);
 }
