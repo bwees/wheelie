@@ -40,22 +40,6 @@ void BmsRelay::loop() {
   }
 }
 
-void BmsRelay::maybeReplayPackets() {
-  for (const IndividualPacketStat& stat :
-       packet_tracker_.getIndividualPacketStats()) {
-    if (stat.total_num < 1) {
-      continue;
-    }
-    if ((now_millis_ - stat.last_packet_millis) <
-        packetTypeRebroadcastTimeout(stat.id)) {
-      continue;
-    }
-    std::vector<uint8_t> data_copy(stat.last_seen_valid_packet);
-    Packet p(data_copy.data(), data_copy.size());
-    ingestPacket(p);
-  }
-}
-
 void BmsRelay::purgeUnknownData() {
   for (uint8_t b : sourceBuffer_) {
     sink_(b);
@@ -65,7 +49,6 @@ void BmsRelay::purgeUnknownData() {
       unknownDataCallback_(b);
     }
   }
-  packet_tracker_.unknownBytes(sourceBuffer_.size());
   sourceBuffer_.clear();
 }
 
@@ -100,7 +83,6 @@ void BmsRelay::processNextByte() {
 }
 
 void BmsRelay::ingestPacket(Packet& p) {
-  packet_tracker_.processPacket(p, now_millis_);
   for (auto& callback : receivedPacketCallbacks_) {
     callback(this, &p);
   };

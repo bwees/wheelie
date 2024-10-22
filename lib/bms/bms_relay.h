@@ -6,8 +6,6 @@
 #include <limits>
 #include <vector>
 
-#include "packet_tracker.h"
-
 class Packet;
 
 class BmsRelay {
@@ -49,16 +47,6 @@ class BmsRelay {
   void setUnknownDataCallback(const Sink& c) { unknownDataCallback_ = c; }
 
 
-  bool isCharging() { return last_status_byte_ & 0x20; }
-  bool isBatteryEmpty() { return last_status_byte_ & 0x4; }
-  bool isBatteryTempOutOfRange() {
-    // Both these bits throw the same error, one is prob hot and the other is
-    // cold.
-    return last_status_byte_ & 3;
-  }
-  bool isBatteryOvercharged() { return last_status_byte_ & 8; }
-
-  const PacketTracker& getPacketTracker() const { return packet_tracker_; }
 
  private:
   void processNextByte();
@@ -73,12 +61,10 @@ class BmsRelay {
   std::vector<uint8_t> sourceBuffer_;
 
 
-  uint8_t last_status_byte_ = 0;
   const Source source_;
   const Sink sink_;
   const MillisProvider millis_provider_;
   int32_t now_millis_;
-  PacketTracker packet_tracker_;
 };
 
 #endif  // BMS_RELAY_H
