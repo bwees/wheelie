@@ -14,7 +14,7 @@ The goal of this porject was to create a simple and cheap (under $25) method of 
 - [ESP32-S3 Mini Development Board](https://www.amazon.com/gp/product/B0CJ85F5CG)
 - [SN65HVD230 CAN Bus Transceiver](https://www.amazon.com/gp/product/B07ZT7LLSK)
     - Any CAN bus transceiver will work (i.e. TJA1050), this one is just conveniently small and can be soldered directly onto the ESP32-S3 Mini. 
-    The ESP32 provides power a ground to the board via one of its GPIOs to provide a clean soldering setup. Check out the picture below for soldering configuration
+    The ESP32 provides a ground to the board via one of its GPIOs to provide a clean soldering setup. Check out the picture below for soldering configuration
     - CAN Controllers, like the MCP2515 and MCP2551, will NOT work without modification to the code. This project uses the ESP32's build in CAN controller and only requires a transceiver to work
 
 This project utilizes a [similar trick](https://github.com/lolwheel/Owie?tab=readme-ov-file#receiving-rs485-directly-via-hardware-uart) that Owie does to receive RS485 packets over UART. This saves on cost and complexity during soldering.
