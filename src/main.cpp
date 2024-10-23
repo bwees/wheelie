@@ -5,7 +5,7 @@
 #include "config.h"
 #include "bms.h"
 #include "ota.h"
-#include "can_cmds.h"
+#include "canbus.h"
 
 HardwareSerial BMSSerial(0);
 

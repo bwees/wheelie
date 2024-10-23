@@ -1,6 +1,6 @@
 #include <ESP32-TWAI-CAN.hpp>
 
-#include "can_cmds.h"
+#include "canbus.h"
 #include "config.h"
 #include "packet_parsers.h"
 #include "ota.h"
@@ -39,9 +39,12 @@ void can_send_cell_voltage(Packet *packet) {
         int32_t send_index = 0;
         uint8_t buffer[8];
 
-        // Append the cell offset and the total number of cells (assuming 1 cell for this example)
+        // Append the cell offset and the total number of cells
         buffer[send_index++] = current_cell;       // Cell offset we are starting at
         buffer[send_index++] = NUM_CELLS;      // Number of cells total in the pack
+
+        // copy in a max of 3 values into the buffer (3*2 byte ints = 6 bytes) for total
+        // of 8 bytes in the packet
 
         if (current_cell < cell_max) {
             buffer_append_float16(buffer, cells[current_cell++], 1e3, &send_index);

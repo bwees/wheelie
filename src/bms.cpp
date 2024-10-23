@@ -1,7 +1,7 @@
 #include <bms_relay.h>
 
 #include "bms.h"
-#include "can_cmds.h"
+#include "canbus.h"
 
 BmsRelay* relay;
 
