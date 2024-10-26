@@ -1,7 +1,9 @@
-#include <ArduinoOTA.h>
+#pragma once
 
-const char* ssid     = "fmbms";
-const char* password = "ffm";
+extern const char* ssid;
+extern const char* password;
+extern bool otaEnabled;
+
 
 void ota_loop();
 void ota_setup();

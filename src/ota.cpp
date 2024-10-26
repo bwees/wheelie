@@ -1,6 +1,10 @@
 #include "ota.h"
+#include <ArduinoOTA.h>
 
-bool enabled = false;
+bool otaEnabled = false;
+
+const char* ssid     = "fmbms";
+const char* password = "ffm";
 
 void ota_setup() {
     ArduinoOTA
@@ -50,9 +54,9 @@ void ota_control(bool enable) {
         ArduinoOTA.end();
     }
 
-    enabled = enable;
+    otaEnabled = enable;
 }
 
 void ota_loop() {
-    if (enabled) ArduinoOTA.handle();
+    if (otaEnabled) ArduinoOTA.handle();
 }
