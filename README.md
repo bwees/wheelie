@@ -16,7 +16,8 @@ The goal of this porject was to create a simple and cheap (under $25) method of 
     - Any CAN bus transceiver will work (i.e. TJA1050), the VD230 is just conveniently small and can be soldered directly onto the ESP32-S3 Mini. 
     The ESP32 provides a ground to the board via one of its GPIOs to provide a clean soldering setup. Check out the picture below for soldering configuration
     - CAN Controllers, like the MCP2515 and MCP2551, will NOT work without modification to the code. This project uses the ESP32's build in CAN controller and only requires a transceiver to work
-
+- [IRF540N N-Channel MOSFET](https://www.amazon.com/dp/B07PH6FPZR)
+    - This is used to wake the BMS from sleep (we have to connect VBAT to Ground that is on the blue BMS wire)
 This project utilizes a [similar trick](https://github.com/lolwheel/Owie?tab=readme-ov-file#receiving-rs485-directly-via-hardware-uart) that Owie does to receive RS485 packets over UART. This saves on cost and complexity during soldering.
 
 A 3D-printed case is in the works to make a clean mounting solution in the electronics housing. 
