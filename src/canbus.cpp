@@ -47,13 +47,13 @@ void can_send_cell_voltage(Packet *packet) {
         // of 8 bytes in the packet
 
         if (current_cell < cell_max) {
-            buffer_append_float16(buffer, cells[current_cell++], 1e3, &send_index);
+            buffer_append_int16(buffer, cells[current_cell++], &send_index);
         }
         if (current_cell < cell_max) {
-            buffer_append_float16(buffer, cells[current_cell++], 1e3, &send_index);
+            buffer_append_int16(buffer, cells[current_cell++], &send_index);
         }
         if (current_cell < cell_max) {
-            buffer_append_float16(buffer, cells[current_cell++], 1e3, &send_index);
+            buffer_append_int16(buffer, cells[current_cell++], &send_index);
         }
 
         transmit_can(CAN_ID | (CAN_PACKET_BMS_V_CELL << 8), buffer, send_index);
